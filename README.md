@@ -1,9 +1,6 @@
 # android-media-fingerprint
 A library to create fingerprints for media files
 
-# countries
-Java language enums for Countries, Languages, and related items
-
 Examples:
 ```
 ImageFingerprinter fingerprinter = new PerceptualHashFingerprinter();
