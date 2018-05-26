@@ -3,11 +3,11 @@ package com.singhinderjeet.mediafingerprint;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
 
-public class PerceptualHashFingerprint implements ImageFingerprint {
+public class PerceptualHashFingerprinter implements ImageFingerprinter {
     // Based on https://github.com/gavinliu/SimilarPhoto
 
     @Override
-    public long getFingerPrint(Bitmap bitmap) {
+    public long create(Bitmap bitmap) {
         bitmap = scale(bitmap);
         double[][] grayPixels = getGrayPixels(bitmap);
         double grayAvg = getGrayAvg(grayPixels);
@@ -26,7 +26,7 @@ public class PerceptualHashFingerprint implements ImageFingerprint {
     }
 
     @Override
-    public boolean isSimilar(long fingerprint1, long fingerprint2) {
+    public boolean similar(long fingerprint1, long fingerprint2) {
         return hammingDistance(fingerprint1, fingerprint2) <= 5;
     }
 
