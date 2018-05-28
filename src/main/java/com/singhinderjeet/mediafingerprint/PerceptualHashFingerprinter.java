@@ -31,6 +31,7 @@ public class PerceptualHashFingerprinter implements ImageFingerprinter {
     public long create(Bitmap bitmap) {
         bitmap = scale(bitmap);
         double[][] grayPixels = getGrayPixels(bitmap);
+        bitmap.recycle();
         double grayAvg = getGrayAvg(grayPixels);
         return getFingerPrint(grayPixels, grayAvg);
     }
