@@ -1,10 +1,31 @@
 package com.singhinderjeet.mediafingerprint;
 
+import java.io.File;
+
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 
 public class PerceptualHashFingerprinter implements ImageFingerprinter {
     // Based on https://github.com/gavinliu/SimilarPhoto
+
+    /**
+     * @param imageFile File containing the image
+     * @return 0 if fingerprint couldn't be calculated, a valid fingerprint otherwise
+     */
+    @Override
+    public long create(File imageFile) {
+        try {
+            BitmapFactory.Options options = new BitmapFactory.Options();
+            options.inPreferredConfig = Bitmap.Config.ARGB_8888;
+            Bitmap bitmap = BitmapFactory.decodeFile(imageFile.getAbsolutePath(), options);
+            long fingerprint = create(bitmap);
+            bitmap.recycle();
+            return fingerprint;
+        } catch (Throwable e) { // handle errors (like out of memory) as well as exceptions
+            return 0;
+        }
+    }
 
     @Override
     public long create(Bitmap bitmap) {
