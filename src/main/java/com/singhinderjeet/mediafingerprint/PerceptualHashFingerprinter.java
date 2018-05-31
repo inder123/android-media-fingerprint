@@ -49,7 +49,7 @@ public class PerceptualHashFingerprinter implements ImageFingerprinter {
 
     @Override
     public boolean similar(long fingerprint1, long fingerprint2) {
-        return hammingDistance(fingerprint1, fingerprint2) <= 5;
+        return fingerprint1 != 0 && fingerprint2 != 0 && hammingDistance(fingerprint1, fingerprint2) <= 5;
     }
 
     private Bitmap scale(Bitmap bitmap) {
