@@ -6,7 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 
-public class PerceptualHashFingerprinter implements ImageFingerprinter {
+final class PerceptualHashFingerprinter implements FingerprintStrategy {
     // Based on https://github.com/gavinliu/SimilarPhoto
 
     /**
@@ -27,7 +27,6 @@ public class PerceptualHashFingerprinter implements ImageFingerprinter {
         }
     }
 
-    @Override
     public long create(Bitmap bitmap) {
         bitmap = scale(bitmap);
         double[][] grayPixels = getGrayPixels(bitmap);
@@ -36,7 +35,6 @@ public class PerceptualHashFingerprinter implements ImageFingerprinter {
         return getFingerPrint(grayPixels, grayAvg);
     }
 
-    @Override
     public int hammingDistance(long fingerprint1, long fingerprint2) {
         int dist = 0;
         long result = fingerprint1 ^ fingerprint2;
